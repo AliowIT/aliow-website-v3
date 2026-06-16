@@ -334,7 +334,7 @@ function AliowThesis() {
         <p className="thesis-body">
           The gap between good strategy and good outcomes is almost always{' '}
           <em>execution</em>. We close it by holding strategy, technology,
-          intelligence, and change in the same pair of hands, from diagnosis
+          intelligence, and change management in the same pair of hands, from diagnosis
           to delivery.
         </p>
       </Reveal>
