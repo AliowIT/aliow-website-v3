@@ -1,0 +1,266 @@
+/* =========================================================
+   Aliow — Foundations: Colors & Type
+   Source: Figma "Aliow fase 2.fig" — METADATA + frame audit
+   ========================================================= */
+
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../fonts/PPNeueMontreal-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../fonts/PPNeueMontreal-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../fonts/PPNeueMontreal-SemiBolditalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../fonts/PPNeueMontreal-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("../fonts/PPNeueMontreal-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Brand color tokens (raw) ------------------------- */
+  --aliow-navy:        rgb(2, 29, 51);     /* #021D33 — primary brand */
+  --aliow-navy-rgb:    2, 29, 51;
+  --aliow-green:       rgb(191, 254, 76);  /* #BFFE4C — active green */
+  --aliow-green-alt:   rgb(189, 253, 77);  /* hover / pressed swatch in figma */
+  --aliow-green-rgb:   191, 254, 76;
+  --aliow-black:       rgb(0, 0, 0);
+  --aliow-white:       rgb(255, 255, 255);
+
+  /* ---- Neutral scale (extracted from figma usage) ------- */
+  --aliow-silver-200:  rgb(248, 250, 252); /* near-white text on navy */
+  --aliow-silver-300:  rgb(217, 217, 217); /* card fill, image base */
+  --aliow-silver-400:  rgb(208, 213, 221); /* hairline strokes (light) */
+  --aliow-silver-500:  rgb(184, 196, 201); /* card strokes */
+  --aliow-ink-500:     rgb(82, 82, 91);    /* input placeholder ink */
+  --aliow-ink-700:     rgb(24, 24, 27);    /* form label ink */
+
+  /* ---- Semantic surface tokens -------------------------- */
+  --bg-base:           var(--aliow-white);
+  --bg-inverse:        var(--aliow-navy);
+  --bg-tint:           var(--aliow-silver-300);
+
+  --fg-primary:        var(--aliow-navy);
+  --fg-on-inverse:     var(--aliow-white);
+  --fg-muted:          var(--aliow-ink-500);
+  --fg-label:          var(--aliow-ink-700);
+
+  --accent:            var(--aliow-green);
+  --accent-ink:        var(--aliow-navy); /* text drawn ON accent */
+
+  --stroke-hairline:   var(--aliow-silver-500);
+  --stroke-hairline-dark: rgba(255,255,255,0.18);
+
+  /* ---- Radii ------------------------------------------- */
+  --r-pill:        500px;   /* nav, buttons, name inputs */
+  --r-card:        50px;    /* feature cards, hero panels */
+  --r-input:       20px;    /* textarea */
+  --r-sm:          12px;
+
+  /* ---- Shadow / elevation ------------------------------ */
+  --shadow-card:     0 4px 4px 0 rgba(0,0,0,0.25);  /* white sheet over navy */
+  --shadow-input:    0 1px 2px 0 rgba(16,24,40,0.05);
+
+  /* ---- Spacing scale (4-pt) ---------------------------- */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  40px;
+  --s-8:  56px;
+  --s-9:  72px;
+  --s-10: 96px;
+  --s-11: 128px;
+  --s-12: 160px;
+  --s-13: 192px;
+
+  /* ---- Page rhythm (figma frame width = 1512 px) ------- */
+  --page-max:     1512px;
+  --page-gutter:  78px;   /* edge inset used throughout */
+
+  /* ---- Type families ----------------------------------- */
+  --font-display: "PP Neue Montreal", "Neue Haas Grotesk", "Helvetica Neue", system-ui, sans-serif;
+  --font-body:    "PP Neue Montreal", "Neue Haas Grotesk", "Helvetica Neue", system-ui, sans-serif;
+  --font-ui:      "Inter", "PP Neue Montreal", system-ui, sans-serif;   /* small UI labels + buttons */
+
+  /* ---- Type roles -------------------------------------- *
+   * Figma observed sizes: 57 (xl display), 42 (display),
+   * 36 (lg quote), 32 (name), 28 (section eyebrow),
+   * 20 (body / eyebrow), 18 (button + UI), 16 (input),
+   * 14 (label), 14 (eyebrow numerals).
+   * Line-heights: 100% for xl display, 46/44/64 elsewhere.
+   * ------------------------------------------------------ */
+  --t-display-xl-size: 57px;
+  --t-display-xl-lh:   64px;
+  --t-display-xl-trk:  -0.25px;
+
+  --t-display-size: 42px;
+  --t-display-lh:   46px;
+
+  --t-quote-size:   36px;
+  --t-quote-lh:     44px;
+
+  --t-name-size:    32px;
+  --t-name-lh:      36px;
+
+  --t-eyebrow-size: 20px;
+  --t-eyebrow-lh:   24px;
+
+  --t-body-size:    20px;
+  --t-body-lh:      28px;
+
+  --t-button-size:  18px;
+  --t-button-lh:    24px;
+  --t-button-weight: 700;
+
+  --t-input-size:   16px;
+  --t-input-lh:     24px;
+
+  --t-label-size:   14px;
+  --t-label-lh:     20px;
+
+  --t-num-size:     14px;
+  --t-num-lh:       64px;
+
+  /* ---- Motion ------------------------------------------ */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.6, 0.0, 0.2, 1);
+  --dur-fast: 140ms;
+  --dur-med:  240ms;
+  --dur-slow: 420ms;
+}
+
+/* =========================================================
+   Semantic type classes — apply directly in markup.
+   ========================================================= */
+
+html, body {
+  font-family: var(--font-body);
+  color: var(--fg-primary);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.t-display-xl {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-display-xl-size);
+  line-height: var(--t-display-xl-lh);
+  letter-spacing: var(--t-display-xl-trk);
+}
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-display-size);
+  line-height: var(--t-display-lh);
+}
+.t-quote {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-quote-size);
+  line-height: var(--t-quote-lh);
+}
+.t-quote-italic {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: var(--t-quote-size);
+  line-height: var(--t-quote-lh);
+}
+.t-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-name-size);
+  line-height: var(--t-name-lh);
+}
+.t-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-eyebrow-size);
+  line-height: var(--t-eyebrow-lh);
+}
+.t-body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--t-body-size);
+  line-height: var(--t-body-lh);
+}
+.t-button {
+  font-family: var(--font-ui);
+  font-weight: var(--t-button-weight);
+  font-size: var(--t-button-size);
+  line-height: var(--t-button-lh);
+}
+.t-input {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: var(--t-input-size);
+  line-height: var(--t-input-lh);
+}
+.t-label {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: var(--t-label-size);
+  line-height: var(--t-label-lh);
+}
+.t-num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--t-num-size);
+  line-height: var(--t-num-lh);
+}
+
+/* =========================================================
+   Element defaults (h1..h6 etc) — match figma roles.
+   ========================================================= */
+
+h1 { font: 500 var(--t-display-xl-size)/var(--t-display-xl-lh) var(--font-display);
+     letter-spacing: var(--t-display-xl-trk); margin: 0; }
+h2 { font: 500 var(--t-display-size)/var(--t-display-lh) var(--font-display); margin: 0; }
+h3 { font: 500 var(--t-quote-size)/var(--t-quote-lh) var(--font-display); margin: 0; }
+h4 { font: 500 var(--t-name-size)/var(--t-name-lh) var(--font-display); margin: 0; }
+h5 { font: 500 var(--t-eyebrow-size)/var(--t-eyebrow-lh) var(--font-display); margin: 0; }
+h6 { font: 500 var(--t-button-size)/var(--t-button-lh) var(--font-ui); margin: 0; }
+
+p  { font: 500 var(--t-body-size)/var(--t-body-lh) var(--font-body); margin: 0 0 var(--s-4) 0; }
+small { font: 400 var(--t-label-size)/var(--t-label-lh) var(--font-ui); color: var(--fg-muted); }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+a:hover { opacity: 0.7; }
+
+/* =========================================================
+   Color utility helpers
+   ========================================================= */
+.bg-navy  { background: var(--bg-inverse); color: var(--fg-on-inverse); }
+.bg-white { background: var(--bg-base);    color: var(--fg-primary); }
+.bg-accent{ background: var(--accent);     color: var(--accent-ink); }
+.bg-silver{ background: var(--aliow-silver-300); color: var(--fg-primary); }

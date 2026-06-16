@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+
+# Local env files
+.env.local
+.env.*.local
+*.local
+
+# Logs
+*.log
+
+# Editor
+.DS_Store
+.idea
+/.vscode/
+
+# Misc
+*.cpuprofile
+.eslintcache
+.claude
+CLAUDE.md
