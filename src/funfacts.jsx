@@ -951,6 +951,11 @@ function FunFactsReel() {
     setPlaying(true);
   }, []);
 
+  const seekToScene = React.useCallback((i) => {
+    if (seekRef.current) seekRef.current(i * 5);
+    setPlaying(true);
+  }, []);
+
   const sceneIdx = Math.min(SCENES - 1, Math.floor(t / 5));
 
   return (
@@ -985,16 +990,28 @@ function FunFactsReel() {
             const localT = t - i * 5;
             const f = i === sceneIdx ? clamp(localT / 5, 0, 1) : i < sceneIdx ? 1 : 0;
             return (
-              <div key={i} className="pip">
-                <div className="fill" style={{ transform: `scaleX(${f})` }} />
-              </div>);
+              <button key={i} className="pip-btn" onClick={() => seekToScene(i)} aria-label={`Go to slide ${i + 1}`}>
+                <div className="pip">
+                  <div className="fill" style={{ transform: `scaleX(${f})` }} />
+                </div>
+              </button>);
 
           })}
         </div>
 
         {/* Controls */}
         <div className="scene-controls">
+          <button onClick={() => seekToScene(Math.max(0, sceneIdx - 1))} aria-label="Previous slide">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+              <path d="M9 2 L3 7 L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
           <span className="scene-label">{String(sceneIdx + 1).padStart(2, '0')} / {String(SCENES).padStart(2, '0')}</span>
+          <button onClick={() => seekToScene(Math.min(SCENES - 1, sceneIdx + 1))} aria-label="Next slide">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+              <path d="M5 2 L11 7 L5 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
           <button onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Pause reel' : 'Play reel'}>
             {playing ?
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none">

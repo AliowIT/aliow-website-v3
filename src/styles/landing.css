@@ -490,6 +490,14 @@ img { display: block; max-width: 100%; }
   gap: 8px;
   z-index: 10;
 }
+.scene-rail .pip-btn {
+  background: none;
+  border: none;
+  padding: 10px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
 .scene-rail .pip {
   width: 28px;
   height: 4px;
@@ -497,6 +505,10 @@ img { display: block; max-width: 100%; }
   background: rgba(255,255,255,0.14);
   overflow: hidden;
   position: relative;
+  transition: background .14s var(--ease-out);
+}
+.scene-rail .pip-btn:hover .pip {
+  background: rgba(255,255,255,0.30);
 }
 .scene-rail .pip .fill {
   position: absolute;
