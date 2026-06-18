@@ -13,10 +13,7 @@
   /* Hero: stack copy above cards */
   .hero {
     min-height: auto;
-    padding: 40px clamp(20px, 4vw, 48px) 80px;
-  }
-  .hero-nav {
-    margin-bottom: 56px;
+    padding: 136px clamp(20px, 4vw, 48px) 80px;
   }
   .wordmark-svg { height: 26px; }
 
@@ -97,7 +94,6 @@
   }
 
   /* Hero nav: hide secondary nav links, keep wordmark + Contact */
-  .hero-nav { margin-bottom: 40px; }
   .nav-links { gap: 16px; }
   .nav-links a:not(.contact) { display: none; }
   .nav-links a.contact {

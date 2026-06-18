@@ -23,9 +23,17 @@ function Wordmark() {
 
 }
 
-function Nav() {
+export function Nav() {
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="hero-nav">
+    <header className={`hero-nav${scrolled ? ' scrolled' : ''}`}>
       <Wordmark />
       <nav className="nav-links" aria-label="Primary">
         <a href="#what">What we do</a>
@@ -113,7 +121,6 @@ function LocationPill() {
 function Hero() {
   return (
     <section id="top" className="hero" data-screen-label="01 Hero">
-      <Nav />
       <div className="hero-grid">
         <div className="hero-copy">
           <LocationPill />

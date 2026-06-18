@@ -1,5 +1,5 @@
 import React from 'react';
-import Hero from './hero.jsx';
+import Hero, { Nav } from './hero.jsx';
 import { FunFactsReel } from './funfacts.jsx';
 import { WhatWeDo, AliowThesis, AIPractice, Transform, Values, ReadyToTalk, FooterFinal } from './sections.jsx';
 
@@ -7,7 +7,9 @@ import { WhatWeDo, AliowThesis, AIPractice, Transform, Values, ReadyToTalk, Foot
 
 function App() {
   return (
-    <div className="page">
+    <>
+      <Nav />
+      <div className="page">
       <Hero />
       <WhatWeDo />
       <FunFactsReel />
@@ -18,6 +20,7 @@ function App() {
       <ReadyToTalk />
       <FooterFinal />
     </div>
+    </>
   );
 }
 
