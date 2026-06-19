@@ -522,7 +522,7 @@ function FooterFinal() {
       <div className="contact-line">
         <a href="mailto:info@aliow.it">info@aliow.it</a>
         <span>·</span>
-        <a href="tel:+351937912271">+351 937 912 271</a>
+        <a href="tel:+351216073796">+351 216 073 796</a>
       </div>
     </footer>);
 
