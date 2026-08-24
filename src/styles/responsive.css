@@ -93,13 +93,60 @@
     padding-right: 20px;
   }
 
-  /* Hero nav: hide secondary nav links, keep wordmark + Contact */
-  .nav-links { gap: 16px; }
-  .nav-links a:not(.contact) { display: none; }
-  .nav-links a.contact {
-    padding: 10px 18px;
-    font-size: 14px;
+  /* Hero nav: hide inline links, show hamburger */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    top: 57px;
+    background: rgba(2, 29, 51, 0.97);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    z-index: 999;
+    padding: 32px 24px 40px;
+    overflow-y: auto;
+    animation: menu-slide-in 0.22s cubic-bezier(.22,.61,.36,1) both;
   }
+  @keyframes menu-slide-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-menu-links a {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2;
+    color: rgba(255,255,255,0.78);
+    text-decoration: none;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.14s ease;
+  }
+  .mobile-menu-links a:last-child { border-bottom: none; }
+  .mobile-menu-links a:hover { color: #fff; }
+  .mobile-menu-links a.contact {
+    display: block;
+    margin-top: 24px;
+    padding: 14px 22px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 26px;
+    border-bottom: none;
+  }
+  .mobile-menu-links a.contact:hover { background: rgba(255,255,255,0.14); color: #fff; }
 
   /* Headlines */
   .hero-statement {
@@ -297,4 +344,6 @@
     display: inline-flex;
     align-items: center;
   }
+  .nav-hamburger { min-height: 44px; min-width: 44px; }
+  .mobile-menu-links a { min-height: 44px; }
 }

@@ -25,6 +25,7 @@ function Wordmark() {
 
 export function Nav() {
   const [scrolled, setScrolled] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -32,17 +33,50 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
+
+  React.useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
+
   return (
-    <header className={`hero-nav${scrolled ? ' scrolled' : ''}`}>
-      <Wordmark />
-      <nav className="nav-links" aria-label="Primary">
-        <a href="#what">What we do</a>
-        <a href="#facts">Ways of working</a>
-        <a href="#ai">AI Practice</a>
-        <a href="#replatforming">Replatforming</a>
-        <a href="#contact" className="contact">Contact us</a>
-      </nav>
-    </header>);
+    <>
+      <header className={`hero-nav${scrolled ? ' scrolled' : ''}`}>
+        <Wordmark />
+        <nav className="nav-links" aria-label="Primary">
+          <a href="#what">What we do</a>
+          <a href="#facts">Ways of working</a>
+          <a href="#ai">AI Practice</a>
+          <a href="#replatforming">Replatforming</a>
+          <a href="#contact" className="contact">Contact us</a>
+        </nav>
+        <button
+          className={`nav-hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}>
+          <span /><span /><span />
+        </button>
+      </header>
+      {menuOpen && (
+        <div className="mobile-menu" role="dialog" aria-label="Navigation">
+          <nav className="mobile-menu-links">
+            <a href="#what" onClick={close}>What we do</a>
+            <a href="#facts" onClick={close}>Ways of working</a>
+            <a href="#ai" onClick={close}>AI Practice</a>
+            <a href="#replatforming" onClick={close}>Replatforming</a>
+            <a href="#contact" className="contact" onClick={close}>Contact us</a>
+          </nav>
+        </div>
+      )}
+    </>);
 
 }
 
