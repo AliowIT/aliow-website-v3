@@ -391,16 +391,10 @@
   color: var(--aliow-navy);
   opacity: 0.42;
   white-space: nowrap;
-  transition: opacity var(--dur-med) var(--ease-out),
-              transform var(--dur-med) var(--ease-out);
   user-select: none;
   flex-shrink: 0;
   padding: 4px 0;
   border-bottom: 1px solid transparent;
-}
-.trusted-mark:hover {
-  opacity: 1;
-  border-bottom-color: var(--aliow-green);
 }
 
 /* ============================================================
@@ -483,12 +477,6 @@
   color: var(--aliow-navy);
   background: rgba(255,255,255,0.6);
   white-space: nowrap;
-  transition: background var(--dur-fast) var(--ease-out),
-              border-color var(--dur-fast) var(--ease-out);
-}
-.tag:hover {
-  background: #fff;
-  border-color: var(--aliow-navy);
 }
 
 .pillar-link {
@@ -616,14 +604,6 @@
   grid-template-columns: 36px 1fr;
   gap: 22px;
   align-items: start;
-  transition: background var(--dur-med) var(--ease-out),
-              border-color var(--dur-med) var(--ease-out),
-              transform var(--dur-med) var(--ease-out);
-}
-.ai-card:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.20);
-  transform: translateY(-2px);
 }
 .ai-card-icon {
   width: 32px;
@@ -749,12 +729,6 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  transition: transform var(--dur-med) var(--ease-out),
-              box-shadow var(--dur-med) var(--ease-out);
-}
-.tx-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(2,29,51,0.08);
 }
 
 .tx-from {
