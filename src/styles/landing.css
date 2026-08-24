@@ -123,6 +123,41 @@ img { display: block; max-width: 100%; }
 }
 .nav-links a.contact:hover { background: rgba(255,255,255,0.14); }
 
+/* ---- Hamburger button (hidden on desktop) ----------------- */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.14s ease;
+  z-index: 1010;
+  flex-shrink: 0;
+}
+.nav-hamburger:hover { background: rgba(255,255,255,0.08); }
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---- Mobile menu overlay (hidden on desktop) -------------- */
+.mobile-menu { display: none; }
+
 /* ---- Hero grid -------------------------------------------- */
 .hero-grid {
   display: grid;
