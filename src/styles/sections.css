@@ -415,6 +415,7 @@
   margin: 0 auto;
 }
 .thesis-label {
+  margin: 0;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -782,7 +783,7 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--aliow-ink-500);
-  margin-bottom: 40px;
+  margin: 0 0 40px 0;
 }
 
 .values-grid {

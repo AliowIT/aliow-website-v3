@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="apple-mobile-web-app-title" content="aliow" />
+  <title>aliow - Page not found</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <style>
+    :root {
+      --aliow-navy: #021D33;
+      --aliow-green: #BFFE4C;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      background: var(--aliow-navy);
+      color: #F8FAFC;
+      font-family: "PP Neue Montreal", "Inter", system-ui, sans-serif;
+      text-align: center;
+    }
+    .wordmark { display: inline-block; margin-bottom: 48px; line-height: 0; }
+    .wordmark svg { width: 120px; height: auto; }
+    .eyebrow {
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--aliow-green);
+      margin: 0 0 16px;
+    }
+    h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      font-weight: 500;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      color: rgba(248, 250, 252, 0.75);
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      border-radius: 500px;
+      background: var(--aliow-green);
+      color: var(--aliow-navy);
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .home-link:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div>
+    <a href="/" class="wordmark" aria-label="aliow home">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 161 44"
+        fill="none"
+        role="img"
+        aria-label="aliow">
+        <path
+          d="M31.748 11.753V0H0v11.898h28.463A31.36 31.36 0 0 0 9.36 21.041C3.409 27.023.135 34.989.135 43.47h11.25c0-5.513 2.115-10.678 5.974-14.554 3.802-3.82 8.865-5.95 14.276-5.994V43.47h11.948V11.742H31.748z"
+          fill="#BFFE4C" />
+        <path
+          d="M99.822 5h-5.31v5.288h5.31zM80.313 33.917c-.225 0-.608 0-.608-2.017V21.503c0-5.422-3.07-8.28-8.898-8.28s-10.238 2.992-10.508 8.213l-.022.493h5.388l.034-.426c.192-2.6.979-3.831 4.928-3.831s3.859 1.927 3.859 2.554c0 1.793-1.744 2.196-5.378 2.88-4.995.94-9.878 2.34-9.878 8.1 0 5.758 3.184 6.946 7.92 6.946 4.737 0 5.862-1.098 7.56-3.204.473 1.95 1.688 2.8 3.904 2.8s1.553-.09 2.34-.28l.36-.09v-3.584l-.54.09c-.225.033-.337.033-.461.033m-5.828-5.714c0 3.44-2.373 5.49-6.356 5.49s-3.409-.874-3.409-2.823c0-1.95 1.395-3.026 5.344-3.81 1.98-.414 3.477-.795 4.433-1.255v2.398zM90.955 5h-5.31v33.185h5.31zm8.867 8.93h-5.31v24.21h5.31zm14.738-.718c-7.223 0-11.88 4.907-11.88 12.503s4.646 12.459 11.846 12.459 11.846-4.907 11.846-12.504-4.635-12.458-11.801-12.458zm0 20.436c-4.005 0-6.402-2.97-6.402-7.933s.619-7.932 6.402-7.932c5.782 0 6.311 2.969 6.311 7.932s-2.363 7.933-6.311 7.933m40.497-19.718-4.534 16.839-4.421-16.84h-5.142l-4.41 16.829-4.5-16.828h-5.726l7.335 24.21h5.209l4.601-16.793 4.59 16.794h5.209l7.335-24.211z"
+          fill="#fff" />
+      </svg>
+    </a>
+    <p class="eyebrow">404 error</p>
+    <h1>This page doesn't exist.</h1>
+    <p>The page you're looking for may have been moved or removed. Let's get you back on track.</p>
+    <a href="/" class="home-link">Back to homepage</a>
+  </div>
+</body>
+</html>

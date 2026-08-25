@@ -327,10 +327,10 @@ function AliowThesis() {
   return (
     <section id="thesis" className="thesis-section section-lift" data-screen-label="04 The Aliow thesis">
       <Reveal as="div" className="aliow-thesis">
-        <div className="thesis-label">
+        <h2 className="thesis-label">
           <span className="thesis-dot" aria-hidden="true"></span>
           The Aliow thesis
-        </div>
+        </h2>
         <p className="thesis-body">
           The gap between good strategy and good outcomes is almost always{' '}
           <em>execution</em>. We close it by holding strategy, technology,
@@ -394,7 +394,7 @@ function AIPractice() {
               <div className="ai-card-icon">{c.icon}</div>
               <div>
                 <div className="ai-card-kicker">{c.kicker}</div>
-                <h4 className="ai-card-title">{c.title}</h4>
+                <h3 className="ai-card-title">{c.title}</h3>
                 <p className="ai-card-desc">{c.desc}</p>
               </div>
             </Reveal>
@@ -479,7 +479,7 @@ const VALUES = [
 function Values() {
   return (
     <section id="values" className="values-section" data-screen-label="07 Values">
-      <div className="values-eyebrow">Our values</div>
+      <h2 className="values-eyebrow">Our values</h2>
       <div className="values-grid">
         {VALUES.map((v, i) =>
         <Reveal as="div" key={v.name} delay={i * 90} className="value">
