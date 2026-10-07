@@ -12,7 +12,6 @@
 @media (max-width: 1024px) {
   /* Hero: stack copy above cards */
   .hero {
-    min-height: auto;
     padding: 136px clamp(20px, 4vw, 48px) 80px;
   }
   .wordmark-svg { height: 26px; }
@@ -206,16 +205,42 @@
     margin-bottom: 24px;
   }
   .facts-stage {
-    height: 75vw;
-    min-height: 280px;
-    max-height: 420px;
+    height: calc(75vw + 108px);
+    min-height: 388px;
+    max-height: 528px;
   }
   .facts-caption {
     flex-direction: column;
     gap: 12px;
     font-size: 12px;
   }
-  .scene-rail { gap: 6px; }
+  .scene-rail { gap: 6px; bottom: 68px; }
+
+  /* Reserve a band under the animation: pips first, controls below them */
+  .facts-stage-canvas {
+    bottom: 108px;
+    height: auto;
+    overflow: hidden;
+  }
+  .scene-controls {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 12px;
+    white-space: nowrap;
+  }
+  .scene-controls button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .scene-controls .scene-label {
+    white-space: nowrap;
+    min-width: 54px;
+    text-align: center;
+  }
 
   /* Section content */
   .what-title,
@@ -321,8 +346,8 @@
     font-size: clamp(28px, 9vw, 36px);
   }
   .facts-stage {
-    height: 75vw;
-    min-height: 280px;
+    height: calc(75vw + 108px);
+    min-height: 388px;
   }
 
   .what-title,
