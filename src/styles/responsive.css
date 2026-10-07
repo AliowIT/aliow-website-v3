@@ -48,10 +48,6 @@
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .tx-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;

@@ -408,7 +408,7 @@ function AIPractice() {
 // ─────────────────────────────────────────────────────────────
 // SECTION 3 — Transform / Migration
 // ─────────────────────────────────────────────────────────────
-const TX_CARDS = [
+const TX_ROUTES = [
 {
   from: 'OutSystems',
   to: 'Mendix',
@@ -425,43 +425,173 @@ const TX_CARDS = [
   text: 'Strategic migration with zero-surprise delivery.'
 }];
 
+const TX_STEPS = [
+{ title: 'Assess', text: 'Apps, data, integrations and dependencies, mapped.' },
+{ title: 'Blueprint', text: 'Target architecture, migration waves and business case.' },
+{ title: 'Migrate', text: 'AI-accelerated conversion, data migration and testing, wave by wave.' },
+{ title: 'Run & Evolve', text: 'Go-live, hypercare and continuous evolution.' }];
 
-function MigrationArrow() {
+const TX_PROOFS = [
+{
+  id: 'scale',
+  ring: 'PROVEN AT SCALE · PROVEN AT SCALE · ',
+  title: 'Proven at scale.',
+  text: 'Some of the largest migrations in the world, delivered without stopping the business.',
+  icon: <path d="M4 18 V6 M4 18 H20 M7 14 L11 10 L14 13 L19 7" />
+},
+{
+  id: 'any',
+  ring: 'ANY ORIGIN · ANY DESTINATION · ',
+  title: 'Any origin. Any destination.',
+  text: 'Open code you fully own, or a platform. We recommend what fits each application.',
+  icon: <path d="M12 20 V12 M12 12 L6 5 M12 12 L18 5" />
+},
+{
+  id: 'ai',
+  ring: 'AI-ACCELERATED · AI-ACCELERATED · ',
+  title: 'Our accelerators, AI-powered.',
+  text: 'Proprietary tooling converts code, data and tests faster, with fewer surprises.',
+  icon: <path d="M13 3 L5 14 H11 L10 21 L19 9 H13 Z" />
+},
+{
+  id: 'future',
+  ring: 'FUTURE-PROOF · FUTURE-PROOF · ',
+  title: 'Built for what’s next.',
+  text: 'We track the market and adopt the best tools and practices, so what we build scales and stays compatible as technology evolves.',
+  icon: <path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v4h-4" />
+}];
+
+function ProofBadge({ id, ring, icon }) {
+  const path = `tx-ring-${id}`;
   return (
-    <div className="tx-arrow" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M9 3 V 14 M4.5 9.5 L 9 14 L 13.5 9.5"
-        stroke="currentColor" strokeWidth="1.6"
-        strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </div>);
+    <svg className="tx-badge" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <path id={path} d="M50 50 m-39 0 a39 39 0 1 1 78 0 a39 39 0 1 1 -78 0" />
+      </defs>
+      <circle cx="50" cy="50" r="48" fill="none" stroke="var(--aliow-green)" strokeWidth="1" />
+      <text className="tx-badge-ring" fill="var(--aliow-green)">
+        <textPath href={`#${path}`} startOffset="0" textLength="242" lengthAdjust="spacing">{ring}</textPath>
+      </text>
+      <circle cx="50" cy="50" r="24" fill="var(--aliow-green)" />
+      <g transform="translate(38 38)" fill="none" stroke="var(--aliow-navy)"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{icon}</g>
+    </svg>);
+
+}
+
+function Arrow() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8 H13 M9 4 L13 8 L9 12" stroke="currentColor" strokeWidth="1.6"
+      strokeLinecap="round" strokeLinejoin="round" />
+    </svg>);
 
 }
 
 function Transform() {
   return (
     <section id="replatforming" className="transform-section section-lift" data-screen-label="06 Migrations">
-      <Reveal as="div" className="tx-eyebrow">Replatforming</Reveal>
-      <Reveal as="h2" delay={60} className="tx-title">
-        We’ve done it before.<br />
-        <em>We’ll do it right.</em>
-      </Reveal>
-      <Reveal as="p" delay={80} className="tx-sub">
-        Platform migrations carry real risk, and we won’t pretend otherwise.
-        We have run some of the largest migrations in the world and we bring a
-        proven methodology, our own accelerators and honest counsel.
-      </Reveal>
-
-      <div className="tx-grid">
-        {TX_CARDS.map((c, i) =>
-        <Reveal as="div" key={c.from} delay={i * 110} className="tx-card">
-            <div className="tx-from">{c.from}</div>
-            <MigrationArrow />
-            <h3 className="tx-to">{c.to}</h3>
-            <p className="tx-text">{c.text}</p>
+      <div className="tx-top">
+        <div className="tx-intro">
+          <Reveal as="div" className="tx-eyebrow">Replatforming &amp; Migrations</Reveal>
+          <Reveal as="h2" delay={60} className="tx-title">
+            We’ve done it before.<br />
+            <em>We’ll do it right.</em>
           </Reveal>
-        )}
+          <Reveal as="p" delay={80} className="tx-sub">
+            Migrations carry real risk, and we won’t pretend otherwise. We’ve run
+            some of the largest in the world, with a proven method, our own
+            accelerators and honest counsel.
+          </Reveal>
+          <Reveal as="dl" delay={120} className="tx-meta">
+            <div><dt>Origins</dt><dd>Low-code, legacy, suites</dd></div>
+            <div><dt>Destinations</dt><dd>Open code or platform</dd></div>
+          </Reveal>
+        </div>
+
+        <Reveal as="div" delay={100} className="tx-exit">
+          <span className="tx-exit-tag"><i />OutSystems exit</span>
+          <div className="tx-exit-stat"><span>2</span>/4</div>
+          <p className="tx-exit-title">
+            of the world’s largest OutSystems exits.<br />
+            <em>Delivered by aliow.</em>
+          </p>
+          <p className="tx-exit-text">
+            We migrate OutSystems applications to open, standard stacks (.NET,
+            Java, React…) with AI-accelerated tooling, or to other platforms such as Mendix.
+          </p>
+          <a href="#contact" className="tx-btn tx-btn-green">
+            Book your OutSystems Exit Assessment <Arrow />
+          </a>
+          <p className="tx-exit-note">Cost, risk and timeline for your estate, in 2 weeks.</p>
+        </Reveal>
       </div>
+
+      <div className="tx-routes">
+        <div className="tx-routes-head">
+          <div>
+            <Reveal as="div" className="tx-eyebrow tx-eyebrow-sm">Migration routes</Reveal>
+            <Reveal as="h3" delay={40} className="tx-h3">Routes we know <em>by heart.</em></Reveal>
+          </div>
+          <Reveal as="p" delay={80} className="tx-routes-note">
+            Every route has its own traps. We’ve mapped them, built accelerators
+            for them and walked them at scale.
+          </Reveal>
+        </div>
+        <ul className="tx-route-list">
+          {TX_ROUTES.map((r, i) =>
+          <Reveal as="li" key={r.from} delay={i * 90} className="tx-route">
+              <span className="tx-route-n">R/0{i + 1}</span>
+              <span className="tx-route-from">{r.from}</span>
+              <span className="tx-route-line" aria-hidden="true" />
+              <span className="tx-route-to">{r.to}</span>
+              <span className="tx-route-text">{r.text}</span>
+            </Reveal>
+          )}
+        </ul>
+      </div>
+
+      <Reveal as="div" className="tx-how">
+        <div className="tx-how-head">
+          <div>
+            <div className="tx-eyebrow tx-eyebrow-sm tx-on-dark">How we do it</div>
+            <h3 className="tx-h3">Four steps. <em>Zero surprises.</em></h3>
+            <p className="tx-routes-note tx-how-note">
+              No big bang. Your business keeps running while we move it, wave by wave.
+            </p>
+          </div>
+        </div>
+
+        <ol className="tx-steps">
+          {TX_STEPS.map((st, i) =>
+          <li key={st.title} className="tx-step">
+              <span className="tx-step-n">0{i + 1}</span>
+              <h4>{st.title}</h4>
+              <p>{st.text}</p>
+            </li>
+          )}
+        </ol>
+
+        <div className="tx-hold">
+          <div className="tx-eyebrow tx-eyebrow-sm tx-on-dark">What you can hold us to</div>
+          <div className="tx-proofs">
+            {TX_PROOFS.map((p) =>
+            <div key={p.id} className="tx-proof">
+                <ProofBadge id={p.id} ring={p.ring} icon={p.icon} />
+                <div>
+                  <h4>{p.title}</h4>
+                  <p>{p.text}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="tx-cta">
+          <p>Not sure you should move at all? <em>That’s the first thing we’ll tell you.</em></p>
+          <a href="#contact" className="tx-btn tx-btn-ghost">Talk to a migration lead <Arrow /></a>
+        </div>
+      </Reveal>
     </section>);
 
 }

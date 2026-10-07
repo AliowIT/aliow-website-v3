@@ -48,7 +48,7 @@ export function Nav() {
 
   return (
     <>
-      <header className={`hero-nav${scrolled ? ' scrolled' : ''}`}>
+      <header className={`hero-nav${scrolled || menuOpen ? ' scrolled' : ''}`}>
         <Wordmark />
         <nav className="nav-links" aria-label="Primary">
           <a href="#what">What we do</a>
