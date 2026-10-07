@@ -81,6 +81,9 @@
 
 /* ───────── MOBILE (≤768px) ───────── */
 @media (max-width: 768px) {
+  /* Anchor jumps: leave room for the fixed nav bar */
+  html { scroll-padding-top: 72px; }
+
   /* Page gutters tighten */
   .hero,
   .facts-section {
@@ -200,10 +203,9 @@
     line-height: 1.05;
     margin-bottom: 24px;
   }
+  /* Canvas is a 720×940 portrait scene scaled to the stage width (see NARROW_W/H in funfacts.jsx) */
   .facts-stage {
-    height: calc(75vw + 108px);
-    min-height: 388px;
-    max-height: 528px;
+    height: calc((100vw - 40px) * 940 / 720 + 108px);
   }
   .facts-caption {
     flex-direction: column;
@@ -341,11 +343,6 @@
   .facts-title {
     font-size: clamp(28px, 9vw, 36px);
   }
-  .facts-stage {
-    height: calc(75vw + 108px);
-    min-height: 388px;
-  }
-
   .what-title,
   .ai-title,
   .tx-title,

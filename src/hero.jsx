@@ -44,7 +44,23 @@ export function Nav() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const close = () => setMenuOpen(false);
+  // Mobile menu links: unlock body scroll first, then scroll to the section
+  // with an offset for the fixed nav (native anchor jump fires while the body
+  // is overflow:hidden and gets cancelled/misplaced).
+  const goTo = (e) => {
+    e.preventDefault();
+    const id = e.currentTarget.getAttribute('href').slice(1);
+    document.body.style.overflow = '';
+    setMenuOpen(false);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const navH = document.querySelector('.hero-nav')?.offsetHeight || 57;
+      const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    });
+  };
 
   return (
     <>
@@ -68,11 +84,11 @@ export function Nav() {
       {menuOpen && (
         <div className="mobile-menu" role="dialog" aria-label="Navigation">
           <nav className="mobile-menu-links">
-            <a href="#what" onClick={close}>What we do</a>
-            <a href="#facts" onClick={close}>Ways of working</a>
-            <a href="#ai" onClick={close}>AI Practice</a>
-            <a href="#replatforming" onClick={close}>Replatforming</a>
-            <a href="#contact" className="contact" onClick={close}>Contact us</a>
+            <a href="#what" onClick={goTo}>What we do</a>
+            <a href="#facts" onClick={goTo}>Ways of working</a>
+            <a href="#ai" onClick={goTo}>AI Practice</a>
+            <a href="#replatforming" onClick={goTo}>Replatforming</a>
+            <a href="#contact" className="contact" onClick={goTo}>Contact us</a>
           </nav>
         </div>
       )}

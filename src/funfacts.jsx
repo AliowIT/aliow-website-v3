@@ -13,23 +13,28 @@ import { Easing, clamp, Sprite, TimelineContext } from './animations.jsx';
 // ─────────────────────────────────────────────────────────────────────────
 // Inline stage — provides TimelineContext + auto-scale, no playback bar.
 // ─────────────────────────────────────────────────────────────────────────
+// Logical canvas used on mobile (portrait, text above visual).
+const NARROW_W = 720;
+const NARROW_H = 940;
+
 function ReelStage({ width = 1280, height = 540, duration = 25, playing = true, loop = true, onTick, seekRef, children }) {
   const wrapRef = React.useRef(null);
   const [scale, setScale] = React.useState(1);
   const [narrow, setNarrow] = React.useState(false);
   const [time, setTime] = React.useState(0);
 
-  // Auto-scale to fit container. On narrow viewports (< 700px) crop to the
-  // left half of the canvas (where all text lives) at a larger scale so
-  // headlines remain readable on mobile.
+  // Auto-scale to fit container. On mobile (≤768px, same breakpoint as the
+  // CSS) the scenes switch to a portrait NARROW_W × NARROW_H canvas where the
+  // text sits on top and the visual is stacked underneath it.
   React.useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
+    const mq = window.matchMedia('(max-width: 768px)');
     const measure = () => {
       const r = el.getBoundingClientRect();
-      const isNarrow = r.width < 700;
+      const isNarrow = mq.matches;
       const s = isNarrow
-        ? r.width / (width * 0.5625)
+        ? r.width / NARROW_W
         : Math.min(r.width / width, r.height / height);
       setScale(s);
       setNarrow(isNarrow);
@@ -37,7 +42,8 @@ function ReelStage({ width = 1280, height = 540, duration = 25, playing = true, 
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
-    return () => ro.disconnect();
+    mq.addEventListener('change', measure);
+    return () => {ro.disconnect();mq.removeEventListener('change', measure);};
   }, [width, height]);
 
   // Animation loop
@@ -88,7 +94,7 @@ function ReelStage({ width = 1280, height = 540, duration = 25, playing = true, 
       <div style={narrow ? {
         position: 'absolute',
         left: 0, top: 0,
-        width, height,
+        width: NARROW_W, height: NARROW_H,
         transform: `scale(${scale})`,
         transformOrigin: 'left top',
       } : {
@@ -159,6 +165,8 @@ function Chip({ x, y, w, h, radius = 14, color = GREEN, textColor = NAVY, label,
 // SCENE 1 (0–5s)  ·  "Did you know?"  ·  language chips converging
 // ─────────────────────────────────────────────────────────────────────────
 function Scene1() {
+  const { narrow } = React.useContext(TimelineContext);
+  const dx = narrow ? -595 : 0,dy = narrow ? 480 : 0;
   return (
     <Sprite start={0} end={5}>
       {({ localTime }) => {
@@ -231,15 +239,16 @@ function Scene1() {
               const dE = Easing.easeOutBack(dP);
               const dOut = clamp((localTime - 4.4) / 0.6, 0, 1);
 
-              const fromX = 1320;
-              const x = p.x + (1 - dE) * (fromX - p.x);
+              const fromX = narrow ? 760 : 1320;
+              const px = p.x + dx;
+              const x = px + (1 - dE) * (fromX - px);
               const op = clamp(dP * 1.4, 0, 1) * (1 - Easing.easeInQuad(dOut));
               const scale = 0.85 + 0.15 * dE;
 
               return (
                 <div key={i} style={{
                   position: 'absolute',
-                  left: x, top: p.y,
+                  left: x, top: p.y + dy,
                   width: p.w, height: p.h,
                   borderRadius: p.r,
                   background: p.c,
@@ -268,6 +277,7 @@ function Scene1() {
 // SCENE 2 (5–10s)  ·  parallel timelines — "traditional" vs "aliow"
 // ─────────────────────────────────────────────────────────────────────────
 function Scene2() {
+  const { narrow } = React.useContext(TimelineContext);
   return (
     <Sprite start={5} end={10}>
       {({ localTime }) => {
@@ -328,6 +338,7 @@ function Scene2() {
               No handoffs. No waiting.
             </div>
 
+            <div style={{ position: 'absolute', inset: 0, transform: narrow ? 'translate(-590px, 450px)' : 'none' }}>
             {/* Traditional track header */}
             <div style={{
               position: 'absolute', left: TX, top: 138,
@@ -431,6 +442,7 @@ function Scene2() {
             }}>
               Finish
             </div>
+            </div>
           </div>);
 
       }}
@@ -442,6 +454,7 @@ function Scene2() {
 // SCENE 3 (10–15s)  ·  "From idea to launch in 60 days" — arrive at strength
 // ─────────────────────────────────────────────────────────────────────────
 function Scene3() {
+  const { narrow } = React.useContext(TimelineContext);
   return (
     <Sprite start={10} end={15}>
       {({ localTime }) => {
@@ -506,7 +519,7 @@ function Scene3() {
             </div>
 
             {/* Right side — progress squares */}
-            <div style={{ position: 'absolute', left: 740, top: 180, width: 420 }}>
+            <div style={{ position: 'absolute', left: narrow ? 150 : 740, top: narrow ? 580 : 180, width: 420 }}>
               <div style={{
                 fontFamily: UI, fontSize: 12, letterSpacing: '0.12em',
                 textTransform: 'uppercase', color: DIM, marginBottom: 16
@@ -609,6 +622,7 @@ const SCENE4_FLIPS = [
 ];
 
 function Scene4() {
+  const { narrow } = React.useContext(TimelineContext);
   return (
     <Sprite start={15} end={20}>
       {({ localTime }) => {
@@ -656,6 +670,7 @@ function Scene4() {
               Your team focuses on decisions. Our agents handle the rest.
             </div>
 
+            <div style={{ position: 'absolute', inset: 0, transform: narrow ? 'translate(-650px, 470px)' : 'none' }}>
             {/* Hours counter */}
             <div style={{
               position: 'absolute', left: GX, top: 92,
@@ -726,6 +741,7 @@ function Scene4() {
                 </div>);
 
             })}
+            </div>
           </div>);
 
       }}
@@ -798,6 +814,9 @@ function Scene5({ onReplay }) {
         const footerP = clamp((localTime - SCENE5_FOOTER_T) / 0.4, 0, 1);
 
         const TRACK_X = 90,TRACK_W = 1100,TRACK_Y = 388;
+        // Mobile: vertical timeline, nodes 96px apart (pct 0/22/44/66/88 → 436px track)
+        const VT_X = 100,VT_Y = 420,VT_LEN = 436;
+        const cw = narrow ? NARROW_W : 1280,ch = narrow ? NARROW_H : 540;
 
         return (
           <div style={{ position: 'absolute', inset: 0, opacity: wrapOp }}>
@@ -806,8 +825,8 @@ function Scene5({ onReplay }) {
               {SCENE5_DOTS.map((d, i) =>
               <circle
                 key={i}
-                cx={d.x * 1280}
-                cy={d.y * 540}
+                cx={d.x * cw}
+                cy={d.y * ch}
                 r={d.r}
                 fill={`rgba(180,200,220,${d.a})`} />
 
@@ -841,13 +860,22 @@ function Scene5({ onReplay }) {
 
             </div>
 
-            {/* Journey track */}
-            <div style={{
+            {/* Journey track (vertical on mobile) */}
+            <div style={narrow ? {
+              position: 'absolute', left: VT_X - 1, top: VT_Y + 9,
+              width: 2, height: VT_LEN,
+              background: 'rgba(255,255,255,0.08)', borderRadius: 1
+            } : {
               position: 'absolute', left: TRACK_X, top: TRACK_Y,
               width: TRACK_W, height: 2,
               background: 'rgba(255,255,255,0.08)', borderRadius: 1
             }} />
-            <div style={{
+            <div style={narrow ? {
+              position: 'absolute', left: VT_X - 1, top: VT_Y + 9,
+              width: 2, height: fillPct / 100 * VT_LEN,
+              background: GREEN, borderRadius: 1,
+              boxShadow: '0 0 12px rgba(191,254,76,0.45)'
+            } : {
               position: 'absolute', left: TRACK_X, top: TRACK_Y,
               width: fillPct / 100 * TRACK_W, height: 2,
               background: GREEN, borderRadius: 1,
@@ -869,37 +897,50 @@ function Scene5({ onReplay }) {
               const dotGlow = isActive ? '0 0 0 6px rgba(191,254,76,0.18)' : 'none';
               const titleColor = isActive ? GREEN : WHITE;
 
+              const nodeStyle = narrow ? {
+                position: 'absolute',
+                left: VT_X - 9, top: VT_Y + s.pct / 100 * VT_LEN,
+                width: 560,
+                opacity: isVisible ? visP : 0,
+                transform: `translateY(${ty}px)`,
+                display: 'grid', gridTemplateColumns: '18px 1fr',
+                columnGap: 24, rowGap: 2, alignItems: 'center',
+                textAlign: 'left',
+                transition: 'opacity 200ms, transform 200ms'
+              } : {
+                position: 'absolute',
+                left: nx - 90, top: TRACK_Y - 18,
+                width: 180,
+                opacity: isVisible ? visP : 0,
+                transform: `translateY(${ty}px)`,
+                display: 'flex', flexDirection: 'column',
+                alignItems: 'center', gap: 12,
+                transition: 'opacity 200ms, transform 200ms'
+              };
+
               return (
-                <div key={i} style={{
-                  position: 'absolute',
-                  left: nx - 90, top: TRACK_Y - 18,
-                  width: 180,
-                  opacity: isVisible ? visP : 0,
-                  transform: `translateY(${ty}px)`,
-                  display: 'flex', flexDirection: 'column',
-                  alignItems: 'center', gap: 12,
-                  transition: 'opacity 200ms, transform 200ms'
-                }}>
+                <div key={i} style={nodeStyle}>
                   <div style={{
                     width: 18, height: 18, borderRadius: 9,
                     background: dotBg,
                     border: `2px solid ${dotBorder}`,
                     boxShadow: dotGlow,
+                    gridRow: narrow ? '1 / span 2' : undefined,
                     transition: 'background 320ms, border 320ms, box-shadow 320ms'
                   }} />
                   <div style={{
-                    fontFamily: DISP, fontWeight: 500, fontSize: 17,
+                    fontFamily: DISP, fontWeight: 500, fontSize: narrow ? 26 : 17,
                     color: titleColor,
-                    textAlign: 'center', lineHeight: 1.25,
+                    textAlign: narrow ? 'left' : 'center', lineHeight: 1.25,
                     transition: 'color 320ms'
                   }}>
                     {s.title}
                   </div>
                   <div style={{
-                    fontFamily: DISP, fontWeight: 500, fontSize: 13,
+                    fontFamily: DISP, fontWeight: 500, fontSize: narrow ? 20 : 13,
                     color: 'rgba(255,255,255,0.40)',
-                    textAlign: 'center', lineHeight: 1.3,
-                    marginTop: -6, maxWidth: 160
+                    textAlign: narrow ? 'left' : 'center', lineHeight: 1.3,
+                    marginTop: narrow ? 0 : -6, maxWidth: narrow ? undefined : 160
                   }}>
                     {s.sub}
                   </div>
@@ -911,7 +952,7 @@ function Scene5({ onReplay }) {
             <button
               onClick={onReplay}
               style={{
-                position: 'absolute', left: 80, top: 490,
+                position: 'absolute', left: 80, top: narrow ? 868 : 490,
                 display: 'flex', alignItems: 'center', gap: 10,
                 fontFamily: DISP, fontWeight: 500, fontSize: 16,
                 color: GREEN, background: 'transparent',
